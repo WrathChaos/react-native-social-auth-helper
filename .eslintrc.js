@@ -60,7 +60,6 @@ module.exports = {
     "react-native/no-color-literals": 0,
     "react-native/no-raw-text": 0,
     "import/no-extraneous-dependencies": 2,
-    "import/extensions": ["error", "never", { svg: "always" }],
     "import/no-named-as-default-member": 2,
     "import/order": 0,
     "import/no-duplicates": 2,
@@ -86,12 +85,6 @@ module.exports = {
     camelcase: 2,
     "prefer-destructuring": 2,
     "no-nested-ternary": 2,
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
     "prettier/prettier": [
       "error",
       {
