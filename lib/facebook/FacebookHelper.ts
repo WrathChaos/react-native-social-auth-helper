@@ -1,17 +1,13 @@
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import { LoginManager, AccessToken } from "react-native-fbsdk-next";
+import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import { FacebookUserResponseData } from "./FacebookUserResponseData.model";
+import { FacebookError } from "./FacebookError";
 
 const FACEBOOK_GRAPH_URL = (accessToken: string) =>
   `https://graph.facebook.com/v2.5/me?fields=email,name,picture.type(large)&access_token=${accessToken}`;
 const DEFAULT_FB_PERMISSIONS: string[] = ["public_profile", "email"];
 
-export declare enum FacebookError {
-  USER_CANCELLED = "User cancelled the login process",
-  ACCESS_TOKEN_FAILED = "Something went wrong obtaining access token",
-}
-
-export const facebookLoginWithPermissions = async (
+export const facebookLogin = async (
   permissions: string[] = DEFAULT_FB_PERMISSIONS,
 ): Promise<FirebaseAuthTypes.UserCredential | FacebookError> => {
   const result = await LoginManager.logInWithPermissions(permissions);
