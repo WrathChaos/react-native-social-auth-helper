@@ -1,14 +1,19 @@
 {
-  "name": "react-native-typescript-library-starter",
-  "version": "1.2.0",
-  "description": "Extremely easy to create a React Native Component Library with both Stateful and Functional Component Examples.",
+  "name": "react-native-social-auth-helper",
+  "version": "0.1.0",
+  "description": "All in one place for social authentication helper in React Native",
   "main": "./build/dist/index.js",
-  "repository": "git@github.com:WrathChaos/react-native-typescript-library-starter.git",
+  "repository": "git@github.com:WrathChaos/react-native-social-auth-helper.git",
   "author": "FreakyCoder <kurayogun@gmail.com>",
   "license": "MIT",
   "homepage": "https://www.freakycoder.com",
-  "bugs": "https://github.com/WrathChaos/react-native-typescript-library-starter/issues",
+  "bugs": "https://github.com/WrathChaos/react-native-social-auth-helper/issues",
   "keywords": [
+    "social",
+    "social-auth",
+    "login",
+    "social-login",
+    "social-auth-login",
     "FreakyCoder",
     "freakycoder",
     "kuray",
@@ -65,7 +70,9 @@
     "husky:lint": "npx husky add .husky/pre-commit 'npm run lint'"
   },
   "dependencies": {
-    "@react-native-firebase/auth": "^14.8.0",
-    "react-native-fbsdk-next": "^8.0.0"
+    "@invertase/react-native-apple-authentication": ">= 2.1.5",
+    "@react-native-firebase/auth": ">= 14.8.0",
+    "@react-native-google-signin/google-signin": ">= 7.2.2",
+    "react-native-fbsdk-next": ">= 8.0.0"
   }
 }
