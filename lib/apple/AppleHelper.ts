@@ -21,5 +21,6 @@ export const appleLogin = async () => {
     nonce,
   );
 
-  return auth().signInWithCredential(appleCredential);
+  const userCredential = auth().signInWithCredential(appleCredential);
+  return { appleAuthRequestResponse, userCredential };
 };
