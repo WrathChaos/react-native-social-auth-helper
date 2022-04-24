@@ -1,4 +1,4 @@
-import { appleLogin, AppleError } from "./apple/AppleHelper";
+import { appleLogin } from "./apple/AppleHelper";
 import { googleLogin } from "./google/GoogleHelper";
 import {
   facebookLogin,
@@ -6,6 +6,7 @@ import {
 } from "./facebook/FacebookHelper";
 import { FacebookUserResponseData } from "./facebook/FacebookUserResponseData.model";
 import { FacebookError } from "./facebook/FacebookError";
+import { AppleError } from "./apple/AppleError";
 
 export {
   appleLogin,

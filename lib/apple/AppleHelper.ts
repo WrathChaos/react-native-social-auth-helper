@@ -1,9 +1,6 @@
 import auth from "@react-native-firebase/auth";
 import { appleAuth } from "@invertase/react-native-apple-authentication";
-
-export declare enum AppleError {
-  NO_IDENTIFY_TOKEN = "Apple Sign-In failed - no identify token returned",
-}
+import { AppleError } from "./AppleError";
 
 export const appleLogin = async () => {
   const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -21,6 +18,6 @@ export const appleLogin = async () => {
     nonce,
   );
 
-  const userCredential = auth().signInWithCredential(appleCredential);
+  const userCredential = await auth().signInWithCredential(appleCredential);
   return { appleAuthRequestResponse, userCredential };
 };
