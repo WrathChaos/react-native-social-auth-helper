@@ -50,15 +50,9 @@ import {
 import { AccessToken } from "react-native-fbsdk-next";
 
 export const handleFacebookLogin = async () => {
-    await facebookLogin();
-    const fbCredential = await AccessToken.getCurrentAccessToken();
-    const fbAccessToken = fbCredential.accessToken.toString();
-    // Create a Firebase credential with the AccessToken
-    const authCredential = auth.FacebookAuthProvider.credential(
-    fbCredential.accessToken,
-    );
-    const fbUserData = await fetchFacebookUserData(fbAccessToken);
-    const { id, email, name, picture } = fbUserData.data;
+    const { authCredential, accessToken } = await facebookLogin();
+    const fbUserData = await fetchFacebookUserData(accessToken);
+    const { id, email, name, picture } = fbUserData;
     await auth().signInWithCredential(authCredential);
     // Successfully login and fetched the facebook user data
     // ... your logic

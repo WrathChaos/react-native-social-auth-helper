@@ -34,5 +34,5 @@ export const facebookLogin = async (
 
 export const fetchFacebookUserData = (
   accessToken: string,
-): Promise<{ data: FacebookUserResponseData }> =>
+): Promise<FacebookUserResponseData> =>
   fetch(FACEBOOK_GRAPH_URL(accessToken)).then((response) => response.json());
