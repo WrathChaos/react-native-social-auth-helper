@@ -8,8 +8,9 @@ const DEFAULT_FB_PERMISSIONS: string[] = ["public_profile", "email"];
 
 export interface FB_AUTH {
   accessToken: string;
-  userCredential: FirebaseAuthTypes.UserCredential;
   userData: FacebookUserResponseData;
+  userCredential?: FirebaseAuthTypes.UserCredential;
+  isEmailExists?: boolean;
 }
 
 export const facebookLogin = async (
@@ -46,7 +47,11 @@ export const facebookLogin = async (
         userData: fbUserData,
       };
     }
-    throw "Given email exists";
+    return {
+      accessToken: data.accessToken,
+      userData: fbUserData,
+      isEmailExists: true,
+    };
   } else {
     const userCredential = await auth().signInWithCredential(
       facebookCredential,
