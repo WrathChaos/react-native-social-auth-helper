@@ -8,10 +8,12 @@ import {
 import { FacebookUserResponseData } from "./facebook/FacebookUserResponseData.model";
 import { FacebookError } from "./facebook/FacebookError";
 import { AppleError } from "./apple/AppleError";
+import { GoogleError } from "./google/GoogleError";
 
 export {
   appleLogin,
   googleLogin,
+  GoogleError,
   AppleError,
   FacebookError,
   facebookLogin,

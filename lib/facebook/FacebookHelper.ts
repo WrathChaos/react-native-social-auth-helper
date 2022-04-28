@@ -10,9 +10,11 @@ const DEFAULT_FB_PERMISSIONS: string[] = ["public_profile", "email"];
 export interface FB_AUTH {
   accessToken: string;
   userCredential: FirebaseAuthTypes.UserCredential;
+  userData: FacebookUserResponseData;
 }
 
 export const facebookLogin = async (
+  checkIfEmailExists?: boolean,
   permissions: string[] = DEFAULT_FB_PERMISSIONS,
 ): Promise<FB_AUTH | FacebookError> => {
   const result = await LoginManager.logInWithPermissions(permissions);
@@ -28,8 +30,33 @@ export const facebookLogin = async (
   const facebookCredential = auth.FacebookAuthProvider.credential(
     data.accessToken,
   );
-  const userCredential = await auth().signInWithCredential(facebookCredential);
-  return { userCredential, accessToken: data.accessToken };
+
+  const fbUserData = await fetchFacebookUserData(data.accessToken);
+
+  if (checkIfEmailExists) {
+    const methods = await auth().fetchSignInMethodsForEmail(fbUserData.email);
+    const emailExists = methods.length;
+    if (!emailExists) {
+      const userCredential = await auth().signInWithCredential(
+        facebookCredential,
+      );
+      return {
+        userCredential,
+        accessToken: data.accessToken,
+        userData: fbUserData,
+      };
+    }
+    return FacebookError.EMAIL_EXISTS;
+  } else {
+    const userCredential = await auth().signInWithCredential(
+      facebookCredential,
+    );
+    return {
+      userCredential,
+      accessToken: data.accessToken,
+      userData: fbUserData,
+    };
+  }
 };
 
 export const fetchFacebookUserData = async (
