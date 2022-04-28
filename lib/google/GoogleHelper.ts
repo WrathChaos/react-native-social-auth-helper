@@ -14,7 +14,7 @@ export const googleLogin = async (checkIfEmailExists?: boolean) => {
       );
       return { authCredential, idToken, user };
     }
-    throw '"Given email exists"';
+    throw "Given email exists";
   } else {
     const authCredential = await auth().signInWithCredential(googleCredential);
     return { authCredential, idToken, user };
