@@ -1,6 +1,5 @@
 import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
-import { GoogleError } from "./GoogleError";
 
 export const googleLogin = async (checkIfEmailExists?: boolean) => {
   const { idToken, user } = await GoogleSignin.signIn();
@@ -15,7 +14,7 @@ export const googleLogin = async (checkIfEmailExists?: boolean) => {
       );
       return { authCredential, idToken, user };
     }
-    return GoogleError.EMAIL_EXISTS;
+    throw '"Given email exists"';
   } else {
     const authCredential = await auth().signInWithCredential(googleCredential);
     return { authCredential, idToken, user };

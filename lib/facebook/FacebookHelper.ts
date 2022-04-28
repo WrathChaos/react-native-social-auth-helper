@@ -1,7 +1,6 @@
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import { FacebookUserResponseData } from "./FacebookUserResponseData.model";
-import { FacebookError } from "./FacebookError";
 
 const FACEBOOK_GRAPH_URL = (accessToken: string) =>
   `https://graph.facebook.com/v2.5/me?fields=email,name,picture.type(large)&access_token=${accessToken}`;
@@ -16,15 +15,16 @@ export interface FB_AUTH {
 export const facebookLogin = async (
   checkIfEmailExists?: boolean,
   permissions: string[] = DEFAULT_FB_PERMISSIONS,
-): Promise<FB_AUTH | FacebookError> => {
+): Promise<FB_AUTH> => {
   const result = await LoginManager.logInWithPermissions(permissions);
+
   if (result.isCancelled) {
-    return FacebookError.USER_CANCELLED;
+    throw "User cancelled the login process";
   }
 
   const data = await AccessToken.getCurrentAccessToken();
   if (!data) {
-    return FacebookError.ACCESS_TOKEN_FAILED;
+    throw "Something went wrong obtaining access token";
   }
 
   const facebookCredential = auth.FacebookAuthProvider.credential(
@@ -46,7 +46,7 @@ export const facebookLogin = async (
         userData: fbUserData,
       };
     }
-    return FacebookError.EMAIL_EXISTS;
+    throw "Given email exists";
   } else {
     const userCredential = await auth().signInWithCredential(
       facebookCredential,
