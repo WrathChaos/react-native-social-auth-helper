@@ -62,7 +62,7 @@ export const handleFacebookLogin = async () => {
 
 ## Google Login Usage
 
-Do not forget to add your webCientId for Google configuration
+Do not forget to add your `webCientId` for Google configuration
 
 ```js
 import { googleLogin } from "react-native-social-auth-helper";
