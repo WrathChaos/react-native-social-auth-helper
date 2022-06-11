@@ -36,21 +36,15 @@ export const facebookLogin = async (
 
   if (checkIfEmailExists) {
     const methods = await auth().fetchSignInMethodsForEmail(fbUserData.email);
-    const emailExists = methods.length;
-    if (!emailExists) {
-      const userCredential = await auth().signInWithCredential(
-        facebookCredential,
-      );
-      return {
-        userCredential,
-        accessToken: data.accessToken,
-        userData: fbUserData,
-      };
-    }
+    const isEmailExists = Boolean(methods.length);
+    const userCredential = await auth().signInWithCredential(
+      facebookCredential,
+    );
     return {
+      userCredential,
       accessToken: data.accessToken,
       userData: fbUserData,
-      isEmailExists: true,
+      isEmailExists,
     };
   } else {
     const userCredential = await auth().signInWithCredential(
