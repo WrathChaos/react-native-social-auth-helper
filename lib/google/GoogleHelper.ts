@@ -7,14 +7,9 @@ export const googleLogin = async (checkIfEmailExists?: boolean) => {
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
   if (checkIfEmailExists) {
     const methods = await auth().fetchSignInMethodsForEmail(user.email);
-    const emailExists = methods.length;
-    if (!emailExists) {
-      const authCredential = await auth().signInWithCredential(
-        googleCredential,
-      );
-      return { authCredential, idToken, user };
-    }
-    return { user, googleCredential, isEmailExists: true };
+    const isEmailExists = Boolean(methods.length);
+    const authCredential = await auth().signInWithCredential(googleCredential);
+    return { user, googleCredential, authCredential, idToken, isEmailExists };
   } else {
     const authCredential = await auth().signInWithCredential(googleCredential);
     return { authCredential, idToken, user };
