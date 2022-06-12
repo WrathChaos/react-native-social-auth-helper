@@ -11,6 +11,7 @@ export interface FB_AUTH {
   userData: FacebookUserResponseData;
   userCredential?: FirebaseAuthTypes.UserCredential;
   isEmailExists?: boolean;
+  isMethodSame?: boolean;
 }
 
 export const facebookLogin = async (
@@ -36,6 +37,7 @@ export const facebookLogin = async (
 
   if (checkIfEmailExists) {
     const methods = await auth().fetchSignInMethodsForEmail(fbUserData.email);
+    const isMethodSame = methods.includes("facebook.com");
     const isEmailExists = Boolean(methods.length);
     const userCredential = await auth().signInWithCredential(
       facebookCredential,
@@ -45,6 +47,7 @@ export const facebookLogin = async (
       accessToken: data.accessToken,
       userData: fbUserData,
       isEmailExists,
+      isMethodSame,
     };
   } else {
     const userCredential = await auth().signInWithCredential(
