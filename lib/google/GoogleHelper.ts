@@ -9,8 +9,8 @@ export const googleLogin = async (checkIfEmailExists?: boolean) => {
     const methods = await auth().fetchSignInMethodsForEmail(user.email);
     const isMethodSame = methods.includes("google.com");
     const isEmailExists = Boolean(methods.length);
-    if (!isMethodSame) {
-      return Promise.reject("login method is not google");
+    if (!isMethodSame && methods.length > 0) {
+      return Promise.reject({code: "login method is not google", socialType: methods[0]});
     }
     const authCredential = await auth().signInWithCredential(googleCredential);
     return {
