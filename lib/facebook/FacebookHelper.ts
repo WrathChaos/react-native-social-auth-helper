@@ -40,7 +40,10 @@ export const facebookLogin = async (
     const isMethodSame = methods.includes("facebook.com");
     const isEmailExists = Boolean(methods.length);
     if (!isMethodSame && methods.length > 0) {
-      return Promise.reject({code: "login method is not facebook", socialType: methods[0]});
+      return Promise.reject({
+        code: "login method is not facebook",
+        socialType: methods[0],
+      });
     }
     const userCredential = await auth().signInWithCredential(
       facebookCredential,
