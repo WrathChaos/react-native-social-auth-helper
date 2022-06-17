@@ -1,3 +1,4 @@
+import { LOGIN_MATCH_ERROR } from "../index";
 import auth from "@react-native-firebase/auth";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
@@ -11,7 +12,7 @@ export const googleLogin = async (checkIfEmailExists?: boolean) => {
     const isEmailExists = Boolean(methods.length);
     if (!isMethodSame && methods.length > 0) {
       return Promise.reject({
-        code: "login method is not google",
+        code: LOGIN_MATCH_ERROR,
         socialType: methods[0],
       });
     }

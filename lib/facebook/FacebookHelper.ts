@@ -1,3 +1,4 @@
+import { LOGIN_MATCH_ERROR } from "../index";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import { FacebookUserResponseData } from "./FacebookUserResponseData.model";
@@ -41,7 +42,7 @@ export const facebookLogin = async (
     const isEmailExists = Boolean(methods.length);
     if (!isMethodSame && methods.length > 0) {
       return Promise.reject({
-        code: "login method is not facebook",
+        code: LOGIN_MATCH_ERROR,
         socialType: methods[0],
       });
     }
