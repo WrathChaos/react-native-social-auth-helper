@@ -46,9 +46,8 @@ export const facebookLogin = async (
         socialType: methods[0],
       });
     }
-    const userCredential = await auth().signInWithCredential(
-      facebookCredential,
-    );
+    const userCredential =
+      await auth().signInWithCredential(facebookCredential);
     return {
       userCredential,
       accessToken: data.accessToken,
@@ -57,9 +56,8 @@ export const facebookLogin = async (
       isMethodSame,
     };
   } else {
-    const userCredential = await auth().signInWithCredential(
-      facebookCredential,
-    );
+    const userCredential =
+      await auth().signInWithCredential(facebookCredential);
     return {
       userCredential,
       accessToken: data.accessToken,
