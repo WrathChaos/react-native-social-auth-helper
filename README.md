@@ -19,11 +19,10 @@ npm i react-native-social-auth-helper
 <h5><i>IMPORTANT! You need install them</i></h5>
 
 ```json
-"@invertase/react-native-apple-authentication": ">= 2.1.5",
-"@react-native-firebase/auth": ">= 14.8.0",
-"@react-native-google-signin/google-signin": ">= 7.2.2",
-"react-native-fbsdk-next": ">= 8.0.0",
-"jwt-decode": "^3.1.2",
+"@invertase/react-native-apple-authentication": ">= 2.4.0",
+"@react-native-firebase/auth": ">= 21.0.0",
+"@react-native-google-signin/google-signin": ">= 13.1.0",
+"jwt-decode": ">= 4.0.0"
 ```
 
 # Usage
@@ -31,31 +30,7 @@ npm i react-native-social-auth-helper
 ## Import
 
 ```jsx
-import {
-  appleLogin,
-  facebookLogin,
-  fetchFacebookUserData,
-  googleLogin,
-} from "react-native-social-auth-helper";
-```
-
-## Facebook Login Usage
-
-```js
-import {
-  facebookLogin,
-  fetchFacebookUserData,
-} from "react-native-social-auth-helper";
-import { AccessToken } from "react-native-fbsdk-next";
-
-export const handleFacebookLogin = async () => {
-  const { authCredential, accessToken } = await facebookLogin();
-  const fbUserData = await fetchFacebookUserData(accessToken);
-  const { id, email, name, picture } = fbUserData;
-  await auth().signInWithCredential(authCredential);
-  // Successfully login and fetched the facebook user data
-  // ... your logic
-};
+import { appleLogin, googleLogin } from "react-native-social-auth-helper";
 ```
 
 ## Google Login Usage
